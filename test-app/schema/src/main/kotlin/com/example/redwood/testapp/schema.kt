@@ -24,6 +24,7 @@ import app.cash.redwood.schema.Schema
 import app.cash.redwood.schema.Schema.Dependency
 import app.cash.redwood.schema.Widget
 import app.cash.redwood.ui.basic.RedwoodUiBasic
+import app.cash.redwood.ui.core.RedwoodUiCore
 import kotlin.time.Duration
 
 @Schema(
@@ -47,6 +48,7 @@ import kotlin.time.Duration
     Dependency(1, RedwoodUiBasic::class),
     Dependency(2, RedwoodLayout::class),
     Dependency(3, RedwoodLazyLayout::class),
+    Dependency(4, RedwoodUiCore::class),
   ],
 )
 interface TestSchema
