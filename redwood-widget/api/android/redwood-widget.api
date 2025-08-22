@@ -59,6 +59,7 @@ public class app/cash/redwood/widget/RedwoodLayout : android/view/ViewGroup, app
 	protected fun onConfigurationChanged (Landroid/content/res/Configuration;)V
 	protected fun onLayout (ZIIII)V
 	protected fun onMeasure (II)V
+	public fun requestFocus (Lapp/cash/redwood/widget/Widget;)V
 }
 
 public abstract interface class app/cash/redwood/widget/RedwoodView {
@@ -67,6 +68,7 @@ public abstract interface class app/cash/redwood/widget/RedwoodView {
 	public abstract fun getSavedStateRegistry ()Lapp/cash/redwood/widget/SavedStateRegistry;
 	public abstract fun getUiConfiguration ()Lkotlinx/coroutines/flow/StateFlow;
 	public abstract fun getValue ()Ljava/lang/Object;
+	public abstract fun requestFocus (Lapp/cash/redwood/widget/Widget;)V
 }
 
 public abstract interface class app/cash/redwood/widget/SavedStateRegistry {

@@ -18,6 +18,8 @@ abstract interface <#A: kotlin/Any> app.cash.redwood.widget/RedwoodView { // app
         abstract fun <get-uiConfiguration>(): kotlinx.coroutines.flow/StateFlow<app.cash.redwood.ui/UiConfiguration> // app.cash.redwood.widget/RedwoodView.uiConfiguration.<get-uiConfiguration>|<get-uiConfiguration>(){}[0]
     abstract val value // app.cash.redwood.widget/RedwoodView.value|{}value[0]
         abstract fun <get-value>(): #A // app.cash.redwood.widget/RedwoodView.value.<get-value>|<get-value>(){}[0]
+
+    abstract fun requestFocus(app.cash.redwood.widget/Widget<#A>) // app.cash.redwood.widget/RedwoodView.requestFocus|requestFocus(app.cash.redwood.widget.Widget<1:0>){}[0]
 }
 
 abstract interface <#A: kotlin/Any> app.cash.redwood.widget/Widget { // app.cash.redwood.widget/Widget|null[0]
@@ -145,6 +147,7 @@ open class app.cash.redwood.widget/RedwoodUIView : app.cash.redwood.widget/Redwo
         final fun <get-fillWidth>(): kotlin/Boolean // app.cash.redwood.widget/RedwoodUIView.fillWidth.<get-fillWidth>|<get-fillWidth>(){}[0]
         final fun <set-fillWidth>(kotlin/Boolean) // app.cash.redwood.widget/RedwoodUIView.fillWidth.<set-fillWidth>|<set-fillWidth>(kotlin.Boolean){}[0]
 
+    open fun requestFocus(app.cash.redwood.widget/Widget<platform.UIKit/UIView>) // app.cash.redwood.widget/RedwoodUIView.requestFocus|requestFocus(app.cash.redwood.widget.Widget<platform.UIKit.UIView>){}[0]
     open fun superviewChanged() // app.cash.redwood.widget/RedwoodUIView.superviewChanged|superviewChanged(){}[0]
 }
 

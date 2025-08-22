@@ -13,8 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@file:Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE") // for findFocusRequesterRecursive.
+
 package app.cash.redwood.treehouse
 
+import app.cash.redwood.compose.findFocusRequesterRecursive
 import app.cash.redwood.leaks.LeakDetector
 import app.cash.redwood.protocol.Change
 import app.cash.redwood.protocol.EventSink
@@ -26,6 +29,7 @@ import app.cash.redwood.treehouse.Content.State
 import app.cash.redwood.ui.OnBackPressedCallback
 import app.cash.redwood.ui.OnBackPressedDispatcher
 import app.cash.redwood.ui.UiConfiguration
+import app.cash.redwood.ui.core.api.FocusRequester
 import app.cash.zipline.ZiplineScope
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -547,6 +551,22 @@ private class ViewContentCodeBinding<A : AppService>(
       val state = treehouseUiOrNull?.snapshotState() ?: return@launch
       stateStore.put(id, state)
     }
+  }
+
+  override fun hideSoftwareKeyboard() {
+    // TODO: complete this.
+  }
+
+  override fun requestFocus(focusRequester: FocusRequester) {
+    bindingScope.launch(dispatchers.ui) {
+      viewOrNull?.requestFocus(focusRequester)
+    }
+  }
+
+  /** This function is necessary to infer the type parameter [W]. */
+  private fun <W : Any> TreehouseView<W>.requestFocus(focusRequester: FocusRequester) {
+    val widget = children.findFocusRequesterRecursive(focusRequester) ?: return
+    requestFocus(widget)
   }
 
   @OptIn(DelicateCoroutinesApi::class)

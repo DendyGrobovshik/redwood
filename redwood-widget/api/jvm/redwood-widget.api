@@ -54,6 +54,7 @@ public abstract interface class app/cash/redwood/widget/RedwoodView {
 	public abstract fun getSavedStateRegistry ()Lapp/cash/redwood/widget/SavedStateRegistry;
 	public abstract fun getUiConfiguration ()Lkotlinx/coroutines/flow/StateFlow;
 	public abstract fun getValue ()Ljava/lang/Object;
+	public abstract fun requestFocus (Lapp/cash/redwood/widget/Widget;)V
 }
 
 public abstract interface class app/cash/redwood/widget/SavedStateRegistry {
