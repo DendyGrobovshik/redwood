@@ -17,6 +17,8 @@
 
 package app.cash.redwood.dom.testing
 
+import app.cash.burst.Burst
+import app.cash.burst.burstValues
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
 import kotlinx.browser.document
@@ -28,33 +30,76 @@ import kotlinx.dom.clear
 /**
  * This isn't a proper unit test for [DomSnapshotter], it's just a sample.
  */
+@Burst
 internal class DomSnapshotterSampleTest {
-  val snapshotter = DomSnapshotter("DomPaparazziTest")
+  val snapshotter = DomSnapshotter("DomSnapshotterSampleTest")
 
   @Test
   fun happyPath() = runTest {
-    val element = document.documentElement!!
-
-    element.appendElement("h1") {
-      appendText("hello world")
+    val helloWorld = document.createElement("div").apply {
+      appendElement("h1") {
+        appendText("hello world")
+      }
     }
-    snapshotter.snapshot(element, "helloIAmTheSnapshotTest")
+
+    snapshotter.snapshot(helloWorld, "happyPath", Frame.None)
   }
 
   @Test
   fun mismatchedSnapshot() = runTest {
-    val element = document.documentElement!!
-    element.appendElement("h1") {
-      appendText("hello world")
+    val helloWorld = document.createElement("div").apply {
+      appendElement("h1") {
+        appendText("hello world")
+      }
     }
-    snapshotter.snapshot(element, "mismatchedSnapshotTest")
+    snapshotter.snapshot(helloWorld, "mismatchedSnapshot", Frame.None)
 
-    element.clear()
-    element.appendElement("h2") {
-      appendText("hello world")
+    helloWorld.apply {
+      clear()
+      appendElement("h2") {
+        appendText("hello world")
+      }
     }
     assertFailsWith<IllegalStateException> {
-      snapshotter.snapshot(element, "mismatchedSnapshotTest")
+      snapshotter.snapshot(helloWorld, "mismatchedSnapshot", Frame.None)
     }
+  }
+
+  @Test
+  fun exactSizeWithFrame(
+    frame: Frame = burstValues(Frame.None, Frame.Iphone14),
+  ) = runTest {
+    val yellowRect = document.createElement("div").apply {
+      setAttribute(
+        "style",
+        """
+        |background-color: #ffff00;
+        |width: 200px;
+        |height: 100px;
+        |position: relative
+        """.trimMargin(),
+      )
+      appendChild(
+        document.createElement("div").apply {
+          setAttribute(
+            "style",
+            """
+            |background-color: #0000ff;
+            |position: absolute;
+            |width: 50px;
+            |height: 25px;
+            |top: 10px;
+            |right: 20px;
+            """.trimMargin(),
+          )
+        },
+      )
+    }
+
+    snapshotter.snapshot(
+      yellowRect,
+      "exactSizeWithFrame_${frame.width ?: "wrap"}_x_${frame.height ?: "wrap"}",
+      frame,
+    )
   }
 }
