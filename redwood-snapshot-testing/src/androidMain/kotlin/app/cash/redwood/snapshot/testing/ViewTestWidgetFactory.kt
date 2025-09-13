@@ -48,7 +48,7 @@ class ViewText(context: Context) : Text<View> {
       super.onMeasure(widthMeasureSpec, heightMeasureSpec)
     }
   }.apply {
-    textSize = 18f
+    textSize = 17f
     textDirection = View.TEXT_DIRECTION_LOCALE
     gravity = Gravity.CENTER_VERTICAL
     isFocusable = true // For AbstractRedwoodViewFocusTest.
