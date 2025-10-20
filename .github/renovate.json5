@@ -18,7 +18,7 @@
     },
     {
       packagePatterns: [
-        '^org.jetbrains.compose.runtime:runtime:',
+        '^org.jetbrains.compose.runtime:runtime',
       ],
       enabled: false,
     },
