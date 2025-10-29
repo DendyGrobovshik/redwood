@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.2.10"
+kotlin = "2.2.21"
 kotlinx-coroutines = "1.10.2"
 kotlinx-serialization = "1.9.0"
 androidx-activity = "1.11.0"
@@ -8,10 +8,10 @@ jbCompose = "1.9.2"
 ksp = "2.3.0"
 lint = "31.13.0"
 paparazzi = "2.0.0-alpha02"
-zipline = "1.23.0"
+zipline = "1.24.0"
 coil = "3.3.0"
 okio = "3.16.0"
-burst = "2.8.1"
+burst = "2.9.0"
 
 [libraries]
 kotlin-compiler = { module = "org.jetbrains.kotlin:kotlin-compiler", version.ref = "kotlin" }
