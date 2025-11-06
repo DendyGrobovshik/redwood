@@ -48,9 +48,6 @@ internal class HTMLFlexContainer(
 
   override val children: Widget.Children<HTMLElement> = Children(value)
 
-  override val allChildren: List<Widget.Children<HTMLElement>>
-    get() = listOf(children)
-
   private var scrollEventListener: EventListener? = null
 
   init {

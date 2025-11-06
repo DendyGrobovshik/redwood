@@ -73,8 +73,8 @@ internal fun <W : Any> List<Widget<W>>.depthFirst(): Sequence<Widget<W>> {
 private suspend fun <W : Any> SequenceScope<Widget<W>>.yieldDepthFirst(widgets: List<Widget<W>>) {
   for (widget in widgets) {
     yield(widget)
-    for (children in widget.allChildren) {
-      yieldDepthFirst(children.widgets)
-    }
+//    for (children in widget.allChildren) {
+//      yieldDepthFirst(children.widgets)
+//    }
   }
 }

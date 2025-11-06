@@ -138,7 +138,6 @@ internal class HTMLElementBox(
     }
 
     override var modifier: Modifier by delegate::modifier
-    override val allChildren: List<Widget.Children<HTMLElement>> by delegate::allChildren
 
     fun applyModifiers() {
       var margin = Margin.Zero
