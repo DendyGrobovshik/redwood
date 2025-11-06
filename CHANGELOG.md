@@ -1,7 +1,10 @@
 # Change Log
 
-## [Unreleased]
-[Unreleased]: https://github.com/cashapp/redwood/compare/0.18.0...HEAD
+## [0.19.0]
+[0.19.0]: https://github.com/cashapp/redwood/releases/tag/0.19.0
+
+**This will be the final release of Redwood for the foreseeable future.
+Development will be discontinued at this time.**
 
 New:
 - Focus API. Redwood has a new `FocusRequester` to focus a widget.
