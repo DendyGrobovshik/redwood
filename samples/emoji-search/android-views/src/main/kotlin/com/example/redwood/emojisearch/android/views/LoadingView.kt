@@ -25,7 +25,6 @@ import android.widget.ProgressBar
 import androidx.appcompat.view.ContextThemeWrapper
 import app.cash.redwood.Modifier
 import app.cash.redwood.treehouse.Loading
-import app.cash.redwood.widget.Widget
 
 @SuppressLint("ViewConstructor")
 internal class LoadingView(
@@ -34,7 +33,6 @@ internal class LoadingView(
   Loading<View> {
   override val value = this
   override var modifier: Modifier = Modifier
-  override val allChildren: List<Widget.Children<View>> get() = listOf()
 
   init {
     addView(

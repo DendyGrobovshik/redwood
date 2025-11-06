@@ -28,7 +28,6 @@ import app.cash.redwood.Modifier as RedwoodModifier
 import app.cash.redwood.treehouse.Crashed
 import app.cash.redwood.treehouse.DynamicContentWidgetFactory
 import app.cash.redwood.treehouse.Loading
-import app.cash.redwood.widget.Widget
 
 internal class EmojiSearchDynamicContentWidgetFactory : DynamicContentWidgetFactory<@Composable (Modifier) -> Unit> {
 
@@ -38,8 +37,6 @@ internal class EmojiSearchDynamicContentWidgetFactory : DynamicContentWidgetFact
 
   internal class RealLoading : Loading<@Composable (Modifier) -> Unit> {
     override var modifier: RedwoodModifier = RedwoodModifier
-    override val allChildren: List<Widget.Children<@Composable ((Modifier) -> Unit)>>
-      get() = listOf()
     override val value: @Composable (Modifier) -> Unit = { modifier ->
       Box(
         modifier = modifier.fillMaxSize(),
@@ -54,8 +51,6 @@ internal class EmojiSearchDynamicContentWidgetFactory : DynamicContentWidgetFact
     private var uncaughtException by mutableStateOf<Throwable?>(null)
 
     override var modifier: RedwoodModifier = RedwoodModifier
-    override val allChildren: List<Widget.Children<@Composable ((Modifier) -> Unit)>>
-      get() = listOf()
     override val value: @Composable (Modifier) -> Unit = { modifier ->
       Box(
         modifier = modifier.fillMaxSize(),

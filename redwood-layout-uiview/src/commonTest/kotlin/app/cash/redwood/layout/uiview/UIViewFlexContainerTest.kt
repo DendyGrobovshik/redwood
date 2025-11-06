@@ -121,8 +121,6 @@ class UIViewFlexContainerTest(
     val widget = object : ResizableWidget<UIView> {
       override val value = view
       override var modifier: Modifier = Modifier
-      override val allChildren: List<Widget.Children<UIView>>
-        get() = listOf()
       override var sizeListener: SizeListener? = null
     }
 

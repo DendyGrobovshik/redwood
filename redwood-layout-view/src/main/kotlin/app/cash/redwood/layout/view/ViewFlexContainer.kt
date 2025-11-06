@@ -32,7 +32,6 @@ import app.cash.redwood.ui.Density
 import app.cash.redwood.ui.Px
 import app.cash.redwood.widget.ChangeListener
 import app.cash.redwood.widget.ViewGroupChildren
-import app.cash.redwood.widget.Widget
 import app.cash.redwood.yoga.Direction
 import app.cash.redwood.yoga.FlexDirection
 import app.cash.redwood.yoga.Node
@@ -77,8 +76,6 @@ internal class ViewFlexContainer(
   private var onScroll: ((Px) -> Unit)? = null
 
   override var modifier: Modifier = Modifier
-  override val allChildren: List<Widget.Children<View>>
-    get() = listOf(children)
 
   init {
     yogaLayout.rootNode.direction = when (hostView.resources.configuration.layoutDirection) {

@@ -1,5 +1,4 @@
 public abstract interface class app/cash/redwood/layout/widget/Box : app/cash/redwood/widget/Widget {
-	public fun getAllChildren ()Ljava/util/List;
 	public abstract fun getChildren ()Lapp/cash/redwood/widget/Widget$Children;
 	public abstract fun height-DyLkt4w (I)V
 	public abstract fun horizontalAlignment-njEs0f8 (I)V
@@ -9,7 +8,6 @@ public abstract interface class app/cash/redwood/layout/widget/Box : app/cash/re
 }
 
 public abstract interface class app/cash/redwood/layout/widget/Column : app/cash/redwood/widget/Widget {
-	public fun getAllChildren ()Ljava/util/List;
 	public abstract fun getChildren ()Lapp/cash/redwood/widget/Widget$Children;
 	public abstract fun height-DyLkt4w (I)V
 	public abstract fun horizontalAlignment-njEs0f8 (I)V
@@ -39,7 +37,6 @@ public final class app/cash/redwood/layout/widget/RedwoodLayoutWidgetSystem$Comp
 }
 
 public abstract interface class app/cash/redwood/layout/widget/Row : app/cash/redwood/widget/Widget {
-	public fun getAllChildren ()Ljava/util/List;
 	public abstract fun getChildren ()Lapp/cash/redwood/widget/Widget$Children;
 	public abstract fun height-DyLkt4w (I)V
 	public abstract fun horizontalAlignment-6exqka8 (I)V
@@ -51,7 +48,6 @@ public abstract interface class app/cash/redwood/layout/widget/Row : app/cash/re
 }
 
 public abstract interface class app/cash/redwood/layout/widget/Spacer : app/cash/redwood/widget/Widget {
-	public fun getAllChildren ()Ljava/util/List;
 	public abstract fun height-mnpKzHI (D)V
 	public abstract fun width-mnpKzHI (D)V
 }

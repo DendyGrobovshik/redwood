@@ -17,7 +17,6 @@ package app.cash.redwood.treehouse
 
 import app.cash.redwood.Modifier
 import app.cash.redwood.testing.WidgetValue
-import app.cash.redwood.widget.Widget
 import app.cash.redwood.widget.WidgetSystem
 
 class FakeDynamicContentWidgetFactory : DynamicContentWidgetFactory<WidgetValue> {
@@ -27,7 +26,6 @@ class FakeDynamicContentWidgetFactory : DynamicContentWidgetFactory<WidgetValue>
   private class FakeLoading : Loading<WidgetValue> {
     override val value: WidgetValue = LoadingValue
     override var modifier: Modifier = Modifier
-    override val allChildren: List<Widget.Children<WidgetValue>> get() = listOf()
   }
 
   private data object LoadingValue : WidgetValue {
@@ -39,7 +37,6 @@ class FakeDynamicContentWidgetFactory : DynamicContentWidgetFactory<WidgetValue>
   private class FakeCrashed : Crashed<WidgetValue> {
     private lateinit var uncaughtException: Throwable
     override var modifier: Modifier = Modifier
-    override val allChildren: List<Widget.Children<WidgetValue>> get() = listOf()
     override val value: WidgetValue
       get() = CrashedValue(uncaughtException)
 
