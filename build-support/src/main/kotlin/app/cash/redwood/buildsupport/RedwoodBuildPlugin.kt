@@ -724,4 +724,5 @@ private fun Project.applyKotlinMultiplatform(block: KotlinMultiplatformExtension
 private fun KotlinMultiplatformExtension.iosTargets() {
   iosArm64()
   iosSimulatorArm64()
+  iosX64()
 }
