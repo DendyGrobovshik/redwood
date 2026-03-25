@@ -169,12 +169,12 @@ class RedwoodBuildPlugin : Plugin<Project> {
       val android = extensions.getByName("android") as CommonExtension
       android.apply {
         compileSdk = 36
-        compileOptions {
+        compileOptions.apply {
           sourceCompatibility = JavaVersion.VERSION_11
           targetCompatibility = JavaVersion.VERSION_11
         }
         defaultConfig.minSdk = 23
-        lint {
+        lint.apply {
           checkDependencies = true
           checkReleaseBuilds = false // Full lint runs as part of 'build' task.
         }
