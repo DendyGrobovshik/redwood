@@ -4,7 +4,7 @@ redwoodBuild {
   targets(Common)
 }
 
-apply plugin: 'app.cash.redwood.generator.modifiers'
+apply plugin: 'io.github.tret9.redwood.generator.modifiers'
 
 kotlin {
   // Ensure our codegen correctly works in explicit API mode.

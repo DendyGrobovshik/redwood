@@ -5,7 +5,7 @@ redwoodBuild {
   publishing()
 }
 
-apply plugin: 'app.cash.redwood.generator.widget'
+apply plugin: 'io.github.tret9.redwood.generator.widget'
 
 kotlin {
   sourceSets {

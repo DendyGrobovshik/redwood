@@ -6,7 +6,7 @@ redwoodBuild {
 }
 
 apply plugin: 'org.jetbrains.kotlin.plugin.serialization'
-apply plugin: 'app.cash.zipline'
+apply plugin: 'io.github.tret9.zipline'
 
 kotlin {
   sourceSets {

@@ -1,6 +1,6 @@
 apply plugin: 'org.jetbrains.kotlin.multiplatform'
 apply plugin: 'com.android.library'
-apply plugin: 'app.cash.zipline'
+apply plugin: 'io.github.tret9.zipline'
 
 kotlin {
   iosArm64()

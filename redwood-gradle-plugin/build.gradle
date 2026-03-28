@@ -47,61 +47,61 @@ dependencies {
 gradlePlugin {
   plugins {
     redwoodSchema {
-      id = "app.cash.redwood.schema"
+      id = "io.github.tret9.redwood.schema"
       displayName = "Redwood schema"
       description = "Redwood Schema Gradle plugin"
       implementationClass = "app.cash.redwood.gradle.RedwoodSchemaPlugin"
     }
     redwoodComposeGenerator {
-      id = "app.cash.redwood.generator.compose"
+      id = "io.github.tret9.redwood.generator.compose"
       displayName = "Redwood generator (Compose)"
       description = "Redwood schema Compose code generation Gradle plugin"
       implementationClass = "app.cash.redwood.gradle.RedwoodComposeGeneratorPlugin"
     }
     redwoodComposeProtocolGenerator {
-      id = "app.cash.redwood.generator.compose.protocol"
+      id = "io.github.tret9.redwood.generator.compose.protocol"
       displayName = "Redwood generator (Compose protocol)"
       description = "Redwood schema Compose protocol code generation Gradle plugin"
       implementationClass = "app.cash.redwood.gradle.RedwoodComposeProtocolGeneratorPlugin"
     }
     redwoodModifierGeneratorPlugin {
-      id = "app.cash.redwood.generator.modifiers"
+      id = "io.github.tret9.redwood.generator.modifiers"
       displayName = "Redwood generator (layout modifiers)"
       description = "Redwood schema layout modifier code generation Gradle plugin"
       implementationClass = "app.cash.redwood.gradle.RedwoodModifiersGeneratorPlugin"
     }
     redwoodProtocolGuestGenerator {
-      id = "app.cash.redwood.generator.protocol.guest"
+      id = "io.github.tret9.redwood.generator.protocol.guest"
       displayName = "Redwood generator (guest protocol)"
       description = "Redwood schema guest protocol code generation Gradle plugin"
       implementationClass = "app.cash.redwood.gradle.RedwoodProtocolGuestGeneratorPlugin"
     }
     redwoodProtocolHostGenerator {
-      id = "app.cash.redwood.generator.protocol.host"
+      id = "io.github.tret9.redwood.generator.protocol.host"
       displayName = "Redwood generator (host protocol)"
       description = "Redwood schema host protocol code generation Gradle plugin"
       implementationClass = "app.cash.redwood.gradle.RedwoodProtocolHostGeneratorPlugin"
     }
     redwoodTestingGenerator {
-      id = "app.cash.redwood.generator.testing"
+      id = "io.github.tret9.redwood.generator.testing"
       displayName = "Redwood generator (testing)"
       description = "Redwood schema testing code generation Gradle plugin"
       implementationClass = "app.cash.redwood.gradle.RedwoodTestingGeneratorPlugin"
     }
     redwoodWidgetGenerator {
-      id = "app.cash.redwood.generator.widget"
+      id = "io.github.tret9.redwood.generator.widget"
       displayName = "Redwood generator (widget)"
       description = "Redwood schema widget code generation Gradle plugin"
       implementationClass = "app.cash.redwood.gradle.RedwoodWidgetGeneratorPlugin"
     }
     redwoodWidgetComposeUiGenerator {
-      id = "app.cash.redwood.generator.widget.composeui"
+      id = "io.github.tret9.redwood.generator.widget.composeui"
       displayName = "Redwood generator (Compose UI)"
       description = "Redwood schema widget Compose UI code generation Gradle plugin"
       implementationClass = "app.cash.redwood.gradle.RedwoodWidgetComposeUiGeneratorPlugin"
     }
     redwoodWidgetProtocolGenerator {
-      id = "app.cash.redwood.generator.widget.protocol"
+      id = "io.github.tret9.redwood.generator.widget.protocol"
       displayName = "Redwood generator (widget protocol)"
       description = "Redwood schema widget protocol code generation Gradle plugin"
       implementationClass = "app.cash.redwood.gradle.RedwoodWidgetProtocolGeneratorPlugin"

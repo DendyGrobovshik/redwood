@@ -72,10 +72,10 @@ import org.jetbrains.kotlin.gradle.tasks.FatFrameworkTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
-private const val REDWOOD_GROUP_ID = "app.cash.redwood"
+private const val REDWOOD_GROUP_ID = "io.github.tret9"
 
 // HEY! If you change the major version update release.yaml doc folder.
-private const val REDWOOD_VERSION = "0.20.0-SNAPSHOT"
+private const val REDWOOD_VERSION = "0.20.0-composelive-0.6"
 
 private val isCiEnvironment = System.getenv("CI") == "true"
 
@@ -475,7 +475,7 @@ private class RedwoodBuildExtensionImpl(private val project: Project) : RedwoodB
       // Disable Javadoc jars. They're basically useless relics, but enabling this will also cause
       // AGP to use an old version of Dokka which fails to run on the latest Java versions.
       @Suppress("UnstableApiUsage")
-      configureBasedOnAppliedPlugins(javadocJar = false)
+      configureBasedOnAppliedPlugins(javadocJar = true)
 
       publishToMavenCentral(automaticRelease = true)
       if (project.providers.systemProperty("RELEASE_SIGNING_ENABLED").getOrElse("true").toBoolean()) {
@@ -488,7 +488,7 @@ private class RedwoodBuildExtensionImpl(private val project: Project) : RedwoodB
         pom.name.set(project.name)
         pom.description.set("Multiplatform reactive UI using Kotlin and Jetpack Compose")
         pom.inceptionYear.set("2020")
-        pom.url.set("https://github.com/cashapp/redwood/")
+        pom.url.set("https://github.com/tret9/redwood/")
 
         pom.licenses {
           it.license { license ->
@@ -500,16 +500,16 @@ private class RedwoodBuildExtensionImpl(private val project: Project) : RedwoodB
 
         pom.developers {
           it.developer { developer ->
-            developer.id.set("cashapp")
-            developer.name.set("CashApp")
-            developer.url.set("https://github.com/cashapp")
+            developer.id.set("composelive")
+            developer.name.set("ComposeLive")
+            developer.url.set("https://github.com/ComposeLive-io/")
           }
         }
 
         pom.scm { scm ->
-          scm.url.set("https://github.com/cashapp/redwood/")
-          scm.connection.set("scm:git:git://github.com/cashapp/redwood.git")
-          scm.developerConnection.set("scm:git:ssh://git@github.com/cashapp/redwood.git")
+          scm.url.set("https://github.com/tret9/redwood/")
+          scm.connection.set("scm:git:git://github.com/tret9/redwood.git")
+          scm.developerConnection.set("scm:git:ssh://git@github.com/tret9/redwood.git")
         }
       }
     }
@@ -598,7 +598,7 @@ private class RedwoodBuildExtensionImpl(private val project: Project) : RedwoodB
         "Project ${project.path} must have Zipline plugin to create Zipline application"
       }
     }
-    project.plugins.withId("app.cash.zipline") {
+    project.plugins.withId("io.github.tret9.zipline") {
       hasZipline = true
 
       val prepareTask = project.tasks.register("prepareEmbeddedZiplineApp", ZiplineAppEmbedTask::class.java) {

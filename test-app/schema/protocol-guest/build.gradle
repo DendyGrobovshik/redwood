@@ -4,7 +4,7 @@ redwoodBuild {
   targets(Common)
 }
 
-apply plugin: 'app.cash.redwood.generator.protocol.guest'
+apply plugin: 'io.github.tret9.redwood.generator.protocol.guest'
 
 kotlin {
   // Ensure our codegen correctly works in explicit API mode.

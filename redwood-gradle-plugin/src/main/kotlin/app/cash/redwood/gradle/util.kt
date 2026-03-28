@@ -28,7 +28,7 @@ internal fun Project.redwoodDependency(artifactId: String): Any {
   return if (isInternalBuild) {
     project(":$artifactId")
   } else {
-    "app.cash.redwood:$artifactId:$redwoodVersion"
+    "io.github.tret9:$artifactId:$redwoodVersion"
   }
 }
 

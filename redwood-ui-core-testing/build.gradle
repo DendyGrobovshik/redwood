@@ -6,7 +6,7 @@ redwoodBuild {
 }
 
 apply plugin: 'org.jetbrains.kotlin.multiplatform'
-apply plugin: 'app.cash.redwood.generator.testing'
+apply plugin: 'io.github.tret9.redwood.generator.testing'
 
 kotlin {
   sourceSets {

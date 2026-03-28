@@ -1,7 +1,7 @@
 import app.cash.redwood.buildsupport.ZiplineAppEmbedTask
 
 apply plugin: 'org.jetbrains.kotlin.multiplatform'
-apply plugin: 'app.cash.zipline'
+apply plugin: 'io.github.tret9.zipline'
 
 zipline {
   // This is a test-only contract.
