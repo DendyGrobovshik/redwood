@@ -27,7 +27,7 @@ import kotlin.jvm.JvmOverloads
 public class ComposeWidgetChildren @JvmOverloads constructor(
   private val onModifierUpdated: () -> Unit = {},
 ) : Widget.Children<@Composable (Modifier) -> Unit> {
-  private var modifierTick by mutableIntStateOf(0)
+  public var modifierTick: Int by mutableIntStateOf(0)
 
   private val _widgets = mutableStateListOf<Widget<@Composable (Modifier) -> Unit>>()
   override val widgets: List<Widget<@Composable (Modifier) -> Unit>> get() = _widgets
