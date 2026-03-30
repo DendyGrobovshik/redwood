@@ -281,7 +281,7 @@ internal fun generateComposeUiBinding(schema: Schema, widget: Widget): FileSpec 
                 .add("this.factory.%N(\n", widget.factoryFunction())
                 .indent()
                 .add(delegateArguments.joinToCode(",\n"))
-                .add(",\nmodifier,\n")
+                .add("${if (delegateArguments.isNotEmpty()) ",\n" else ""}modifier,\n")
                 .unindent()
                 .add(")\n")
                 .unindent()
