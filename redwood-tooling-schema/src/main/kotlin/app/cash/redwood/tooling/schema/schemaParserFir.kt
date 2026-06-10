@@ -26,6 +26,7 @@ import app.cash.redwood.tooling.schema.ProtocolWidget.ProtocolProperty
 import app.cash.redwood.tooling.schema.SchemaAnnotation.DependencyAnnotation
 import java.io.File
 import java.net.URLClassLoader
+import org.jetbrains.kotlin.K1Deprecation
 import org.jetbrains.kotlin.KtSourceElement
 import org.jetbrains.kotlin.KtVirtualFileSourceFile
 import org.jetbrains.kotlin.cli.common.GroupedKtSources
@@ -64,7 +65,7 @@ import org.jetbrains.kotlin.fir.declarations.primaryConstructorIfAny
 import org.jetbrains.kotlin.fir.declarations.utils.classId
 import org.jetbrains.kotlin.fir.declarations.utils.isData
 import org.jetbrains.kotlin.fir.expressions.FirAnnotation
-import org.jetbrains.kotlin.fir.expressions.FirArrayLiteral
+import org.jetbrains.kotlin.fir.expressions.FirCollectionLiteral
 import org.jetbrains.kotlin.fir.expressions.FirFunctionCall
 import org.jetbrains.kotlin.fir.expressions.FirGetClassCall
 import org.jetbrains.kotlin.fir.expressions.FirLiteralExpression
@@ -111,6 +112,7 @@ public fun parseSchema(
   return parseProtocolSchema(javaHome, sources, dependencies, type)
 }
 
+@OptIn(K1Deprecation::class)
 public fun parseProtocolSchema(
   javaHome: File,
   sources: Collection<File>,
@@ -171,13 +173,13 @@ public fun parseProtocolSchema(
     configuration = configuration,
   )
 
-  val reporter = DiagnosticReporterFactory.createReporter(messageCollector)
+  val reporter = DiagnosticReporterFactory.createReporter()
 
   val globalScope = GlobalSearchScope.allScope(project)
   val packagePartProvider = environment.createPackagePartProvider(globalScope)
   val projectEnvironment = VfsBasedProjectEnvironment(
     project = project,
-    localFileSystem = localFileSystem,
+    fileSystem = localFileSystem,
     getPackagePartProviderFn = { packagePartProvider },
   )
 
@@ -434,7 +436,8 @@ private fun FirContext.parseWidget(
     firClass.primaryConstructorIfAny(firSession)!!.valueParameterSymbols.map { parameter ->
       val name = parameter.name.identifier
       val type = parameter.resolvedReturnType
-      val property = firClass.symbol.declaredProperties(firSession).single { it.name == parameter.name }
+      val property =
+        firClass.symbol.declaredProperties(firSession).single { it.name == parameter.name }
 
       val propertyAnnotation = findPropertyAnnotation(property.annotations)
       val childrenAnnotation = findChildrenAnnotation(property.annotations)
@@ -611,7 +614,8 @@ private fun FirContext.parseModifier(
     firClass.primaryConstructorIfAny(firSession)!!.valueParameterSymbols.map { parameter ->
       val name = parameter.name.identifier
       val parameterType = parameter.resolvedReturnType.toFqType()
-      val property = firClass.symbol.declaredProperties(firSession).single { it.name == parameter.name }
+      val property =
+        firClass.symbol.declaredProperties(firSession).single { it.name == parameter.name }
 
       val defaultExpression = findDefaultExpression(parameter)
       val deprecation = findDeprecationAnnotation(property.annotations)
@@ -669,7 +673,7 @@ private fun FirContext.findSchemaAnnotation(
     ?: return null
 
   val membersArray = annotation.argumentMapping
-    .mapping[Name.identifier("members")] as? FirArrayLiteral
+    .mapping[Name.identifier("members")] as? FirCollectionLiteral
     ?: throw AssertionError(annotation.source?.text)
   val members = membersArray.argumentList
     .arguments
@@ -684,7 +688,7 @@ private fun FirContext.findSchemaAnnotation(
     }
 
   val dependenciesArray = annotation.argumentMapping
-    .mapping[Name.identifier("dependencies")] as? FirArrayLiteral
+    .mapping[Name.identifier("dependencies")] as? FirCollectionLiteral
   val dependencies = dependenciesArray?.arguments.orEmpty()
     .map {
       val functionCall = it as? FirFunctionCall
@@ -711,14 +715,14 @@ private fun FirContext.findSchemaAnnotation(
     }
 
   val reservedWidgetsArray = annotation.argumentMapping
-    .mapping[Name.identifier("reservedWidgets")] as FirArrayLiteral?
+    .mapping[Name.identifier("reservedWidgets")] as FirCollectionLiteral?
   val reservedWidgets = reservedWidgetsArray?.arguments.orEmpty()
     .map {
       (it as FirLiteralExpression).valueAsInt()
     }
 
   val reservedModifiersArray = annotation.argumentMapping
-    .mapping[Name.identifier("reservedModifiers")] as FirArrayLiteral?
+    .mapping[Name.identifier("reservedModifiers")] as FirCollectionLiteral?
   val reservedModifiers = reservedModifiersArray?.arguments.orEmpty()
     .map {
       (it as FirLiteralExpression).valueAsInt()
@@ -750,14 +754,14 @@ private fun FirContext.findWidgetAnnotation(
     ?: throw AssertionError(annotation.source?.text)
 
   val reservedPropertiesArray = annotation.argumentMapping
-    .mapping[Name.identifier("reservedProperties")] as FirArrayLiteral?
+    .mapping[Name.identifier("reservedProperties")] as FirCollectionLiteral?
   val reservedProperties = reservedPropertiesArray?.arguments.orEmpty()
     .map {
       (it as FirLiteralExpression).valueAsInt()
     }
 
   val reservedChildrenArray = annotation.argumentMapping
-    .mapping[Name.identifier("reservedChildren")] as FirArrayLiteral?
+    .mapping[Name.identifier("reservedChildren")] as FirCollectionLiteral?
   val reservedChildren = reservedChildrenArray?.arguments.orEmpty()
     .map {
       (it as FirLiteralExpression).valueAsInt()
@@ -831,10 +835,12 @@ private fun FirContext.findModifierAnnotation(
   val annotation = annotations.find { it.fqName(firSession) == FqNames.Modifier }
     ?: return null
 
-  val tagExpression = annotation.argumentMapping.mapping[Name.identifier("tag")] as? FirLiteralExpression
-    ?: throw AssertionError(annotation.source?.text)
+  val tagExpression =
+    annotation.argumentMapping.mapping[Name.identifier("tag")] as? FirLiteralExpression
+      ?: throw AssertionError(annotation.source?.text)
 
-  val scopesExpression = annotation.argumentMapping.mapping[Name.identifier("scopes")] as? FirVarargArgumentsExpression
+  val scopesExpression =
+    annotation.argumentMapping.mapping[Name.identifier("scopes")] as? FirVarargArgumentsExpression
   val scopes = scopesExpression?.arguments.orEmpty()
     .map {
       val getClassCall = it as? FirGetClassCall
@@ -919,6 +925,7 @@ private fun ConeTypeProjection.toFqType(): FqType {
               variance = variance,
             )
         }
+
         else -> throw UnsupportedOperationException()
       }
     }
