@@ -1,5 +1,6 @@
 package app.cash.redwood.treehouse
 
+import app.cash.redwood.protocol.BridgeChange
 import app.cash.redwood.protocol.ChangesSink
 import app.cash.redwood.protocol.ChildrenChange
 import app.cash.redwood.protocol.ChildrenTag
@@ -23,6 +24,10 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
 public actual object RdmaBridge : ChangesSink {
+
+  init {
+    _initAllBridges()
+  }
 
   internal actual var callsink: ChangesSink? = null
 
@@ -59,6 +64,9 @@ public actual object RdmaBridge : ChangesSink {
 
   public actual fun createModifierElement(tag: Int, value: JsonElement): ModifierElement =
     ModifierElement(ModifierTag(tag), value)
+  
+  public actual fun createBridgeChange(id: Int, wrapped: Any?): BridgeChange =
+    BridgeChange(Id(id), wrapped)
 
   public actual fun jsonPrimitiveString(value: String): JsonPrimitive = JsonPrimitive(value)
 
@@ -108,6 +116,10 @@ public actual object RdmaBridge : ChangesSink {
 
     override fun createMove(id: Int, childrenTag: Int, fromIndex: Int, toIndex: Int, count: Int) {
       accumulator.add(ChildrenChange.Move(Id(id), ChildrenTag(childrenTag), fromIndex, toIndex, count))
+    }
+
+    override fun createBridgeChange(id: Int, wrapped: Any?) {
+      accumulator.add(BridgeChange(Id(id), wrapped))
     }
 
     override fun createRemove(id: Int, childrenTag: Int, index: Int, detach: Boolean) {

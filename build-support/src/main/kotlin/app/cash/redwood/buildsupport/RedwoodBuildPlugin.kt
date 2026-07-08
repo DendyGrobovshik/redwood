@@ -400,6 +400,7 @@ private class RedwoodBuildExtensionImpl(private val project: Project) : RedwoodB
         project.plugins.apply("com.android.library")
         project.applyKotlinMultiplatform {
           androidTarget {
+            publishLibraryVariants("release")
             modifiedGroup[AndroidDeviceTests, AndroidDeviceTests.Disable].applyTo(project)
           }
           iosTargets()
