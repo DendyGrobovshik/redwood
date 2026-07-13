@@ -40,6 +40,8 @@ public class StandardAppLifecycle(
   private lateinit var host: Host
   private val frameListeners = mutableListOf<FrameListener>()
 
+  public val rdmaEnabled: Boolean = false
+
   override val guestProtocolVersion: RedwoodVersion
     get() = guestRedwoodVersion
 

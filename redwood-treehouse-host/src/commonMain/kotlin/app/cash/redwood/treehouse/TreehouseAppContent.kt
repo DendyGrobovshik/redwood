@@ -500,6 +500,10 @@ private class ViewContentCodeBinding<A : AppService>(
 
   fun start() {
     bindingScope.launch(dispatchers.zipline) {
+      RdmaBridge.callsink = this@ViewContentCodeBinding
+      (codeSession as? ZiplineCodeSession)?.zipline?.quickJs?.rdmaChangeSink =
+        RdmaBridge.asRdmaChangeSink()
+
       val scopedAppService = serviceScope.apply(codeSession.appService)
       val treehouseUi = contentSource!!.get(scopedAppService)
       treehouseUiOrNull = treehouseUi
@@ -575,6 +579,9 @@ private class ViewContentCodeBinding<A : AppService>(
 
     if (canceled) return
     canceled = true
+
+    RdmaBridge.callsink = null
+    (codeSession as? ZiplineCodeSession)?.zipline?.quickJs?.rdmaChangeSink = null
 
     hostAdapterOrNull?.close()
     hostAdapterOrNull = null
