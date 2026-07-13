@@ -256,7 +256,7 @@ public sealed interface ChildrenChange : Change {
      *
      * Note: This property is only populated for hosts running 0.17.0 or newer.
      */
-    public val detach: Boolean = false,
+    public var detach: Boolean = false,
   ) : ChildrenChange {
     override val id: Id get() = Id(_id)
     override val tag: ChildrenTag get() = ChildrenTag(_tag)
