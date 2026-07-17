@@ -37,8 +37,9 @@ import kotlinx.coroutines.plus
  */
 public fun TreehouseUi.asZiplineTreehouseUi(
   appLifecycle: StandardAppLifecycle,
+  rdmaEnabled: Boolean = false,
 ): ZiplineTreehouseUi {
-  val guestAdapter = if (appLifecycle.rdmaEnabled) {
+  val guestAdapter = if (rdmaEnabled) {
     RdmaGuestProtocolAdapter(
       hostVersion = appLifecycle.hostProtocolVersion,
       json = appLifecycle.json,
