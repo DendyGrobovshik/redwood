@@ -1,0 +1,3 @@
+/Users/bronnikov.g/src/redwood/redwood-treehouse-host/.cxx/RelWithDebInfo/69106722/x86/CMakeFiles/redwood-bridge.dir
+/Users/bronnikov.g/src/redwood/redwood-treehouse-host/.cxx/RelWithDebInfo/69106722/x86/CMakeFiles/edit_cache.dir
+/Users/bronnikov.g/src/redwood/redwood-treehouse-host/.cxx/RelWithDebInfo/69106722/x86/CMakeFiles/rebuild_cache.dir

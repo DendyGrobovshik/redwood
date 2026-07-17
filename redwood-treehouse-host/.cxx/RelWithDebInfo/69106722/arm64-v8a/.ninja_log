@@ -1,0 +1,22 @@
+# ninja log v5
+1	40	0	/Users/bronnikov.g/src/redwood/redwood-treehouse-host/.cxx/RelWithDebInfo/69106722/arm64-v8a/CMakeFiles/cmake.verify_globs	75781acabfb9197e
+0	85	1785752105082946617	CMakeFiles/redwood-bridge.dir/Users/bronnikov.g/src/redwood/redwood-protocol/build/generated/bridge/c/app_cash_redwood_protocol_EventTag.c.o	fc129dc60d4b22a2
+1	89	1785752105084919144	CMakeFiles/redwood-bridge.dir/Users/bronnikov.g/src/redwood/redwood-runtime/build/generated/bridge/c/app_cash_redwood_CombinedModifier.c.o	c10f6a3d014dab79
+2	98	1785752105095582592	CMakeFiles/redwood-bridge.dir/Users/bronnikov.g/src/redwood/redwood-protocol/build/generated/bridge/c/app_cash_redwood_protocol_ChildrenChange_Remove.c.o	4c8090d7627e7d3e
+1	114	1785752105110324548	CMakeFiles/redwood-bridge.dir/Users/bronnikov.g/src/redwood/redwood-protocol/build/generated/bridge/c/app_cash_redwood_protocol_PropertyTag.c.o	f351293703d002da
+0	127	1785752105124894676	CMakeFiles/redwood-bridge.dir/Users/bronnikov.g/src/redwood/redwood-protocol/build/generated/bridge/c/app_cash_redwood_protocol_Id.c.o	63c9ed0543772d12
+2	143	1785752105141215838	CMakeFiles/redwood-bridge.dir/Users/bronnikov.g/src/redwood/redwood-protocol/build/generated/bridge/c/app_cash_redwood_protocol_ChildrenChange_Add.c.o	3d6b56152e5c8ce
+1	171	1785752105167459260	CMakeFiles/redwood-bridge.dir/Users/bronnikov.g/src/redwood/redwood-protocol-host/build/generated/bridge/c/app_cash_redwood_protocol_host_UiChildrenChange.c.o	4f4c0ac1f1bedba9
+1	196	1785752105190959718	CMakeFiles/redwood-bridge.dir/Users/bronnikov.g/src/redwood/redwood-runtime/build/generated/bridge/c/app_cash_redwood_ui_Dp.c.o	8e8cfd3771b0798
+2	219	1785752105216135378	CMakeFiles/redwood-bridge.dir/Users/bronnikov.g/src/redwood/redwood-protocol-host/build/generated/bridge/c/app_cash_redwood_protocol_host_UiPropertyChange.c.o	490f02899533b5d3
+2	237	1785752105233674006	CMakeFiles/redwood-bridge.dir/Users/bronnikov.g/src/redwood/redwood-protocol-host/build/generated/bridge/c/app_cash_redwood_protocol_host_UiModifierChange.c.o	d0a966a0c5a62f15
+2	255	1785752105250073540	CMakeFiles/redwood-bridge.dir/Users/bronnikov.g/src/redwood/redwood-protocol/build/generated/bridge/c/app_cash_redwood_protocol_ChildrenChange_Move.c.o	113081153d2ef492
+1	276	1785752105271889546	CMakeFiles/redwood-bridge.dir/Users/bronnikov.g/src/redwood/redwood-protocol-host/build/generated/bridge/c/app_cash_redwood_protocol_host_UiChange.c.o	2c78783a5817d152
+2	288	1785752105284831803	CMakeFiles/redwood-bridge.dir/Users/bronnikov.g/src/redwood/redwood-protocol-host/build/generated/bridge/c/app_cash_redwood_protocol_host_UiCreate.c.o	a71e80295653cb28
+1	304	1785752105301770031	CMakeFiles/redwood-bridge.dir/Users/bronnikov.g/src/redwood/redwood-runtime/build/generated/bridge/c/app_cash_redwood_ui_Margin.c.o	6962826deb48216d
+1	314	1785752105311389383	CMakeFiles/redwood-bridge.dir/Users/bronnikov.g/src/redwood/redwood-protocol-host/src/bridge/c/bridge_jni.c.o	713be8b807d84342
+1	331	1785752105327976162	CMakeFiles/redwood-bridge.dir/Users/bronnikov.g/src/redwood/redwood-runtime/build/generated/bridge/c/app_cash_redwood_Modifier_Companion.c.o	25db458871073d68
+86	352	1785752105350031078	CMakeFiles/redwood-bridge.dir/Users/bronnikov.g/src/redwood/redwood-protocol/build/generated/bridge/c/app_cash_redwood_protocol_ChildrenTag.c.o	633d62cd23d4af3
+1	357	1785752105354891773	CMakeFiles/redwood-bridge.dir/Users/bronnikov.g/src/redwood/redwood-protocol/build/generated/bridge/c/app_cash_redwood_protocol_WidgetTag.c.o	ae9e89b975f3b30d
+1	361	1785752105359533392	CMakeFiles/redwood-bridge.dir/Users/bronnikov.g/src/redwood/redwood-protocol/build/generated/bridge/c/app_cash_redwood_protocol_ModifierTag.c.o	bfddc75315714a2e
+361	441	1785752105438370321	/Users/bronnikov.g/src/redwood/redwood-treehouse-host/build/intermediates/cxx/RelWithDebInfo/69106722/obj/arm64-v8a/libredwood-bridge.so	ad02eb739420d627
