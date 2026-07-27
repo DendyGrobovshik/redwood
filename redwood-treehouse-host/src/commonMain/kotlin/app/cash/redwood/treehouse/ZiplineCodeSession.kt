@@ -71,7 +71,11 @@ internal class ZiplineCodeSession<A : AppService>(
 
   override fun ziplineStop() {
     ziplineScope.close()
-    zipline.close()
+    // Host services bound in TreehouseApp.Spec.bindServices() are owned by the host and may be
+    // shared across code sessions (e.g. a single HTTP client reused by every reload). Closing them
+    // here would cancel in-flight calls belonging to the newly started session, so leave their
+    // lifecycle to the host.
+    zipline.close(closeServices = false)
     leakDetector.watchReference(zipline, "code session stopped")
   }
 
