@@ -49,6 +49,12 @@ tasks.register('extractQuickjsJni') {
       eachFile { it.path = it.path.replaceFirst('jni/', '') }
       into(outDir.get().asFile)
     }
+    copy {
+      from(zipTree(quickjsAarFile.get()))
+      include('assets/**/*.h')
+      eachFile { it.path = it.path.replaceFirst('assets/', 'headers/') }
+      into(outDir.get().asFile)
+    }
   }
 }
 

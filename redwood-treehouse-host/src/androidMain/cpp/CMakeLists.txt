@@ -2,15 +2,8 @@
 cmake_minimum_required(VERSION 3.12)
 set(CMAKE_C_STANDARD 99)
 
-# Header paths: Zipline native sources (sibling repo)
-set(ZIPLINE_NATIVE "${CMAKE_CURRENT_SOURCE_DIR}/../../../../../zipline/zipline/native")
-include_directories(
-    ${ZIPLINE_NATIVE}
-    ${ZIPLINE_NATIVE}/include/share
-    ${ZIPLINE_NATIVE}/include/unix
-    ${ZIPLINE_NATIVE}/quickjs
-)
-
+# Header paths: extracted from zipline-android AAR during extractQuickjsJni
+include_directories("${QUICKJS_JNI_DIR}/headers")
 # Generated bridge C files
 set(BRIDGE_PROTO "${CMAKE_CURRENT_SOURCE_DIR}/../../../../redwood-protocol/build/generated/bridge/c")
 set(BRIDGE_HOST  "${CMAKE_CURRENT_SOURCE_DIR}/../../../../redwood-protocol-host/build/generated/bridge/c")
