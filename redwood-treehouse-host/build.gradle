@@ -178,43 +178,7 @@ android {
     dependsOn(':redwood-protocol-host:compileKotlinJvm')
   }
 
-  // Generate _AllBridges.kt from redwood bridge module exports
-  tasks.register('genAllBridges') {
-    notCompatibleWithConfigurationCache("Uses project references")
-    dependsOn(':redwood-protocol-host:compileKotlinJvm')
-    dependsOn(':redwood-protocol:compileKotlinJvm')
-    dependsOn(':redwood-runtime:compileKotlinJvm')
-    outputs.upToDateWhen { false }
-    doLast {
-      def outFile = file("src/iosMain/kotlin/app/cash/redwood/treehouse/_AllBridges.kt")
-      def retainVals = []
-      def exportsDirs = [
-        file("${rootDir}/redwood-protocol-host/build/generated/bridge/native"),
-        file("${rootDir}/redwood-protocol/build/generated/bridge/native"),
-        file("${rootDir}/redwood-runtime/build/generated/bridge/native"),
-      ]
-      for (dir in exportsDirs) {
-        def f = new File(dir, "_bridge_exports.txt")
-        if (!f.exists()) throw new RuntimeException("genAllBridges: exports file not found: $f")
-        def lines = f.readLines().findAll { !it.isBlank() }
-        if (lines.isEmpty()) throw new RuntimeException("genAllBridges: exports file is empty: $f")
-        retainVals.addAll(lines)
-      }
-      def names = retainVals.unique().sort()
-      outFile.parentFile.mkdirs()
-      outFile.text = '@file:Suppress("unused")\n\n' +
-        'package app.cash.redwood.treehouse\n\n' +
-        names.collect { "import generated_bridges.$it" }.join('\n') + '\n\n' +
-        'internal object _AllBridges {\n' +
-        '    init {\n' +
-        names.collect { "        ${it}()" }.join('\n') + '\n' +
-        '    }\n' +
-        '}\n'
-    }
-  }
-  tasks.matching { it.name.startsWith("compileKotlinIos") }.configureEach {
-    dependsOn('genAllBridges')
-  }
+  // Bridges self-register via @EagerInitialization in each per-class bridge file.
 
   // Needed for unit tests which use ViewCompat whose static fields reference `R.id`s.
   androidResources.enable = true

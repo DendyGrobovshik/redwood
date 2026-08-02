@@ -50,7 +50,6 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile).configureEach
 tasks.named('compileKotlinJvm').configure {
   outputs.dir("${buildDir}/generated/bridge/c")
   outputs.dir("${buildDir}/generated/bridge/native")
-  outputs.upToDateWhen { file("${buildDir}/generated/bridge/native/_bridge_exports.txt").exists() }
 }
 tasks.matching { it.name == "compileNativeMainKotlinMetadata" }.configureEach {
   dependsOn(tasks.named("compileKotlinJvm"))
