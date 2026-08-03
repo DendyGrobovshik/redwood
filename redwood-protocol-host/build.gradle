@@ -17,7 +17,7 @@ kotlin {
         api projects.redwoodWidget
         api projects.redwoodLeakDetector
         implementation libs.androidx.collection
-        compileOnly 'io.github.tret9:zipline-bridge-annotations:1.28.0-composelive-0.11-SNAPSHOT'
+        compileOnly libs.zipline.bridge.annotations
       }
     }
     commonTest {
@@ -35,7 +35,7 @@ kotlin {
 kotlin.sourceSets.nativeMain {
   kotlin.srcDir("${buildDir}/generated/bridge/native")
   dependencies {
-    implementation 'io.github.tret9:zipline:1.28.0-composelive-0.11-SNAPSHOT'
+    implementation libs.zipline
   }
 }
 
@@ -45,7 +45,7 @@ tasks.matching { it.name.startsWith("compileKotlinIos") || it.name.contains("our
 }
 
 dependencies {
-  kotlinCompilerPluginClasspath 'io.github.tret9:zipline-bridge-kotlin-plugin:1.28.0-composelive-0.11-SNAPSHOT'
+  kotlinCompilerPluginClasspath libs.zipline.bridge.kotlin.plugin
 }
 
 buildConfig {
