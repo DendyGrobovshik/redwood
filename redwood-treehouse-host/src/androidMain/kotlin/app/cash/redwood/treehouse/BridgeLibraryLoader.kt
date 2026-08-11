@@ -17,8 +17,6 @@ internal object BridgeLibraryLoader {
     if (loaded) return
     try {
       val oldPolicy = android.os.StrictMode.allowThreadDiskReads()
-      // Load libquickjs first so its symbols are available for libredwood-bridge
-      System.loadLibrary("quickjs")
       System.loadLibrary("redwood-bridge")
 
       // The bridge dispatch (rdmaChangeToJava) calls JNI FindClass for bridge-
