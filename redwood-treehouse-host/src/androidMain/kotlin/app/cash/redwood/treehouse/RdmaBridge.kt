@@ -1,5 +1,6 @@
 package app.cash.redwood.treehouse
 
+import app.cash.redwood.protocol.BridgeChange
 import app.cash.redwood.protocol.ChangesSink
 import app.cash.redwood.protocol.ChildrenChange
 import app.cash.redwood.protocol.ChildrenTag
@@ -73,6 +74,10 @@ public actual object RdmaBridge : ChangesSink {
     ModifierElement(ModifierTag(tag), value)
 
   @JvmStatic
+  public actual fun createBridgeChange(id: Int, wrapped: Any?): BridgeChange =
+    BridgeChange(Id(id), wrapped)
+
+  @JvmStatic
   public actual fun jsonPrimitiveString(value: String): JsonPrimitive = JsonPrimitive(value)
 
   @JvmStatic
@@ -132,6 +137,11 @@ public actual object RdmaBridge : ChangesSink {
     override fun createRemove(id: Int, childrenTag: Int, index: Int, detach: Boolean) {
       accumulator.add(ChildrenChange.Remove(Id(id), ChildrenTag(childrenTag), index, detach))
     }
+
+    override fun createBridgeChange(id: Int, wrapped: Any?) {
+      accumulator.add(BridgeChange(Id(id), wrapped))
+    }
+
 
     override fun setRemoveDetach(index: Int) {
       var removesSeen = 0
