@@ -4,10 +4,6 @@ import app.cash.redwood.Modifier
 import app.cash.redwood.RedwoodCodegenApi
 import app.cash.redwood.protocol.ChangesSink
 import app.cash.redwood.protocol.ChildrenChange
-import app.cash.redwood.protocol.ChildrenChange.Add.Companion.invoke
-import app.cash.redwood.protocol.ChildrenChange.Move.Companion.invoke
-import app.cash.redwood.protocol.ChildrenChange.Remove
-import app.cash.redwood.protocol.ChildrenChange.Remove.Companion.invoke
 import app.cash.redwood.protocol.ChildrenTag
 import app.cash.redwood.protocol.Event
 import app.cash.redwood.protocol.Id
@@ -31,10 +27,10 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 
 internal actual fun BridgeGuestProtocolAdapter(
-    json: Json,
-    hostVersion: RedwoodVersion,
-    widgetSystemFactory: ProtocolWidgetSystemFactory,
-    mismatchHandler: ProtocolMismatchHandler
+  json: Json,
+  hostVersion: RedwoodVersion,
+  widgetSystemFactory: ProtocolWidgetSystemFactory,
+  mismatchHandler: ProtocolMismatchHandler,
 ): GuestProtocolAdapter = BridgeGuestProtocolAdapterImpl(json, hostVersion, widgetSystemFactory, mismatchHandler)
 
 /**
@@ -107,8 +103,6 @@ internal class BridgeGuestProtocolAdapterImpl(
     val rdmaObj: dynamic = js("globalThis.app_cash_redwood_rdmaSendChanges")
     rdmaObj.appendBridgeChange(id.value, wrapped)
   }
-
-  // -- Bridge path for property changes --
 
   override fun <T> appendPropertyChange(
     id: Id,

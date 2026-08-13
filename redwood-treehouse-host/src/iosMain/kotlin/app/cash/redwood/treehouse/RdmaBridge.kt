@@ -61,7 +61,7 @@ public actual object RdmaBridge : ChangesSink {
 
   public actual fun createModifierElement(tag: Int, value: JsonElement): ModifierElement =
     ModifierElement(ModifierTag(tag), value)
-  
+
   public actual fun createBridgeChange(id: Int, wrapped: Any?): BridgeChange =
     BridgeChange(Id(id), wrapped)
 
@@ -141,7 +141,7 @@ public actual object RdmaBridge : ChangesSink {
       val batch = accumulator
       accumulator = mutableListOf()
       if (batch.isNotEmpty()) {
-        RdmaBridge.sendBatch(batch)
+        sendBatch(batch)
       }
     }
 
@@ -149,7 +149,7 @@ public actual object RdmaBridge : ChangesSink {
       val batch = accumulator
       accumulator = mutableListOf()
       if (batch.isNotEmpty()) {
-        RdmaBridge.sendChanges(batch)
+        sendChanges(batch)
       }
     }
   }

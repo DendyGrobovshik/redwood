@@ -10,13 +10,9 @@ import android.util.Log
  * It must be loaded after [libquickjs] (loaded by Zipline's QuickJs) so QuickJS
  * symbols are available for resolution.
  */
-internal object BridgeLibraryLoader {
-  private var loaded = false
-
-  fun ensureLoaded() {
-    if (loaded) return
+public object RdmaBridgeLibraryLoader {
+  public fun load() {
     try {
-      val oldPolicy = android.os.StrictMode.allowThreadDiskReads()
       System.loadLibrary("redwood-bridge")
 
       // The bridge dispatch (rdmaChangeToJava) calls JNI FindClass for bridge-
@@ -31,12 +27,8 @@ internal object BridgeLibraryLoader {
       // Preload the class now (while allowThreadDiskReads is still in effect)
       // so its <clinit> completes before StrictMode is re-enabled.
       try { Class.forName("kotlinx.coroutines.internal.CoroutineExceptionHandlerImplKt") } catch (_: Exception) {}
-
-      android.os.StrictMode.setThreadPolicy(oldPolicy)
-      loaded = true
-      Log.i("BridgeLibraryLoader", "libredwood-bridge loaded successfully")
     } catch (e: UnsatisfiedLinkError) {
-      Log.w("BridgeLibraryLoader", "libredwood-bridge not found — bridge dispatch unavailable", e)
+      Log.w("RdmaBridgeLibraryLoader", "libredwood-bridge not found — bridge dispatch unavailable", e)
     }
   }
 }
