@@ -1,5 +1,5 @@
 package app.cash.redwood.treehouse
-
+import app.cash.redwood.protocol.BridgeChange
 import app.cash.redwood.protocol.ChangesSink
 import app.cash.redwood.protocol.ChildrenChange
 import app.cash.redwood.protocol.Change
@@ -28,6 +28,7 @@ public expect object RdmaBridge : ChangesSink {
   public fun createPropertyChange(id: Int, widgetTag: Int, propertyTag: Int, value: JsonElement): PropertyChange
   public fun createModifierChange(id: Int, elements: List<ModifierElement>): ModifierChange
   public fun createModifierElement(tag: Int, value: JsonElement): ModifierElement
+  public fun createBridgeChange(id: Int, wrapped: Any?): BridgeChange
   public fun jsonPrimitiveString(value: String): JsonPrimitive
   public fun jsonPrimitiveInt(value: Int): JsonPrimitive
   public fun jsonPrimitiveLong(value: Long): JsonPrimitive

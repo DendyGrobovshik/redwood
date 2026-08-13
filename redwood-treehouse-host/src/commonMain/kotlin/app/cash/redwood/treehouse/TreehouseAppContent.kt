@@ -503,6 +503,7 @@ private class ViewContentCodeBinding<A : AppService>(
       RdmaBridge.callsink = this@ViewContentCodeBinding
       (codeSession as? ZiplineCodeSession)?.zipline?.jsEngine?.rdmaChangeSink =
         RdmaBridge.asRdmaChangeSink()
+      (codeSession as? ZiplineCodeSession)?.zipline?.quickJs?.initRdmaChangesChannel()
 
       val scopedAppService = serviceScope.apply(codeSession.appService)
       val treehouseUi = contentSource!!.get(scopedAppService)
