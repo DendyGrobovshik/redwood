@@ -27,32 +27,26 @@ afterEvaluate {
 apply plugin: 'org.jetbrains.kotlin.plugin.serialization'
 apply plugin: 'io.github.tret9.zipline'
 
-// Resolve libquickjs.so from zipline-android AAR via Maven.
-configurations.create('quickjsAar') {
+// Resolve libhermesvmlean.so from zipline-android AAR via Maven.
+configurations.create('hermesAar') {
   canBeConsumed = false
   transitive = false
 }
 dependencies {
-  quickjsAar("io.github.tret9:zipline-android:${libs.versions.zipline.get()}")
+  hermesAar("io.github.tret9:zipline-android:1.27.0-composelive-0.13-SNAPSHOT")
 }
-def quickjsAarFile = configurations.quickjsAar.elements.map { it.first().asFile }
+def hermesAarFile = configurations.hermesAar.elements.map { it.first().asFile }
 
-tasks.register('extractQuickjsJni') {
+tasks.register('extractHermesJni') {
   notCompatibleWithConfigurationCache('Uses project.copy in doLast')
-  def outDir = layout.buildDirectory.dir('quickjs-jni')
-  inputs.files(quickjsAarFile).withPropertyName('quickjsAar')
+  def outDir = layout.buildDirectory.dir('hermes-jni')
+  inputs.files(hermesAarFile).withPropertyName('hermesAar')
   outputs.dir(outDir)
   doLast {
     copy {
-      from(zipTree(quickjsAarFile.get()))
+      from(zipTree(hermesAarFile.get()))
       include('jni/**')
       eachFile { it.path = it.path.replaceFirst('jni/', '') }
-      into(outDir.get().asFile)
-    }
-    copy {
-      from(zipTree(quickjsAarFile.get()))
-      include('assets/**/*.h')
-      eachFile { it.path = it.path.replaceFirst('assets/', 'headers/') }
       into(outDir.get().asFile)
     }
   }
@@ -147,10 +141,39 @@ android {
 
     externalNativeBuild {
       cmake {
-        arguments "-DQUICKJS_JNI_DIR=${layout.buildDirectory.dir('quickjs-jni').get().asFile.absolutePath}"
+        arguments "-DHERMES_JNI_DIR=${layout.buildDirectory.dir('hermes-jni').get().asFile.absolutePath}"
       }
     }
   }
+
+  externalNativeBuild {
+    cmake {
+      path = file('src/androidMain/cpp/CMakeLists.txt')
+    }
+  }
+  packaging {
+    jniLibs {
+      excludes += ['**/libhermesvmlean.so']
+    }
+  }
+
+  // Ensure bridge source files are generated before CMake configure.
+  afterEvaluate {
+    tasks.matching { it.name.startsWith('buildCMake') || it.name.contains('ConfigureCMake') }.configureEach {
+      dependsOn(extractHermesJni,
+                ':redwood-protocol-host:compileKotlinJvm',
+                ':redwood-protocol:compileKotlinJvm',
+                ':redwood-runtime:compileKotlinJvm')
+    }
+  }
+
+
+  tasks.matching { it.name == "compileKotlinIosSimulatorArm64" }.configureEach {
+    dependsOn(':redwood-protocol-host:compileKotlinJvm')
+  }
+
+  // Bridges self-register via @EagerInitialization in each per-class bridge file.
+  // No genAllBridges task needed.
 
   externalNativeBuild {
     cmake {
@@ -166,7 +189,7 @@ android {
   // Ensure bridge source files are generated before CMake configure.
   afterEvaluate {
     tasks.matching { it.name.startsWith('buildCMake') || it.name.contains('ConfigureCMake') }.configureEach {
-      dependsOn(extractQuickjsJni,
+      dependsOn(extractHermesJni,
                 ':redwood-protocol-host:compileKotlinJvm',
                 ':redwood-protocol:compileKotlinJvm',
                 ':redwood-runtime:compileKotlinJvm')

@@ -7,7 +7,7 @@ import android.util.Log
  *
  * On Android, the library is packaged into the APK via [externalNativeBuild]
  * (see [CMakeLists.txt](src/androidMain/cpp/CMakeLists.txt)).
- * It must be loaded after [libquickjs] (loaded by Zipline's QuickJs) so QuickJS
+ * It must be loaded after libhermesvmlean (loaded by Zipline's JsEngine) so Hermes
  * symbols are available for resolution.
  */
 internal object BridgeLibraryLoader {
@@ -17,6 +17,8 @@ internal object BridgeLibraryLoader {
     if (loaded) return
     try {
       val oldPolicy = android.os.StrictMode.allowThreadDiskReads()
+      // Load libhermesvmlean first so its symbols are available for libredwood-bridge
+      System.loadLibrary("hermesvmlean")
       System.loadLibrary("redwood-bridge")
 
       // The bridge dispatch (rdmaChangeToJava) calls JNI FindClass for bridge-

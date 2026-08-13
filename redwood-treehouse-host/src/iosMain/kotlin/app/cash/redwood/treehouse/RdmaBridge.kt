@@ -25,7 +25,6 @@ import kotlinx.serialization.json.put
 
 public actual object RdmaBridge : ChangesSink {
 
-
   internal actual var callsink: ChangesSink? = null
 
   private var batchAccumulator: MutableList<Change>? = null
